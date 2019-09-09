@@ -1,0 +1,7 @@
+---
+applications:
+- name: insecure-bank
+  path: target/insecure-bank.war
+  random-route: true
+  memory: 1G
+  env:
