@@ -28,8 +28,8 @@ pipeline {
           container('docker-with-detect') {
             unstash 'builtSources'
             sh 'mkdir -p /opt/blackduck/shared/target/'
-            sh 'docker build -t cloudbees_detect_app:latest .'
-            sh 'docker save -o /opt/blackduck/shared/target/cloudbees_detect_app.tar cloudbees_detect_app:latest'
+            sh 'docker build -t cloudbees_insecure_bank:latest .'
+            sh 'docker save -o /opt/blackduck/shared/target/cloudbees_insecure_bank.tar cloudbees_insecure_bank:latest'
           }
         }
       }
@@ -47,7 +47,7 @@ pipeline {
                                     --logging.level.com.synopsys.integration=DEBUG \
                                     --detect.project.name="CloudBeesDucky" \
                                     --detect.tools="DOCKER" \
-                                    --detect.docker.image="cloudbees_detect_app:latest" \
+                                    --detect.docker.image="cloudbees_insecure_bank:latest" \
                                     --detect.project.version.name="DOCKER_${BUILD_TAG}" \
                                     --detect.risk.report.pdf=true \
                                     --detect.report.timeout=9000 \
@@ -68,7 +68,7 @@ pipeline {
                     steps {
                         container('python') {
                             sh 'python /opt/blackduck/bdba-pdf.py \
-                                --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
+                                --app="/opt/blackduck/shared/target/cloudbees_insecure_bank.tar" \
                                 --protecode-host="protecode-sc.com" \
                                 --protecode-username="gautamb@synopsys.com" \
                                 --protecode-password="${PROTECODE_SC_PASSWORD}" \
@@ -94,8 +94,8 @@ pipeline {
             sh 'find . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
               sh 'cat my_password.txt | docker login --username gautambaghel --password ${DOCKER_LOGIN_PASSWORD}'
-            sh 'docker tag cloudbees_detect_app:latest gautambaghel/cloudbees_detect_app:latest'
-            sh 'docker push gautambaghel/cloudbees_detect_app:latest'
+            sh 'docker tag cloudbees_insecure_bank:latest gautambaghel/cloudbees_insecure_bank:latest'
+            sh 'docker push gautambaghel/cloudbees_insecure_bank:latest'
           }
         }
       }
