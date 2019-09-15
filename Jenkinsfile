@@ -3,6 +3,7 @@ pipeline {
     environment {
         BLACKDUCK_ACCESS_TOKEN  = credentials('jenkins-blackduck-access-token')
         PROTECODE_SC_PASSWORD   = credentials('jenkins-protecode-sc-password')
+        DOCKER_LOGIN_PASSWORD   = credentials('jenkins-docker-login-password')
     }
     stages {
 
@@ -92,7 +93,7 @@ pipeline {
             unstash 'bdbaReport'
             sh 'find . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
-            sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
+              sh 'cat my_password.txt | docker login --username gautambaghel --password ${DOCKER_LOGIN_PASSWORD}'
             sh 'docker tag cloudbees_detect_app:latest gautambaghel/cloudbees_detect_app:latest'
             sh 'docker push gautambaghel/cloudbees_detect_app:latest'
           }
