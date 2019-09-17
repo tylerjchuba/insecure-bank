@@ -45,7 +45,7 @@ pipeline {
                                     --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                                     --blackduck.trust.cert=true \
                                     --logging.level.com.synopsys.integration=DEBUG \
-                                    --detect.project.name="CloudBeesDucky" \
+                                    --detect.project.name="CloudBeesInsecureBank" \
                                     --detect.tools="DOCKER" \
                                     --detect.docker.image="cloudbees_insecure_bank:latest" \
                                     --detect.project.version.name="DOCKER_${BUILD_TAG}" \
