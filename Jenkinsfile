@@ -22,7 +22,7 @@ pipeline {
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                 --blackduck.trust.cert=true \
-                --detect.project.name="CloudBeesDucky" \
+                --detect.project.name="CloudBeesInsecureBank" \
                 --detect.tools="DETECTOR,POLARIS" \
                 --detect.project.version.name="DETECTOR_${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
