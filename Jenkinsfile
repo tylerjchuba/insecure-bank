@@ -35,7 +35,7 @@ pipeline {
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
                 --detect.report.timeout=9000'
-            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
+            sh 'find  . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
           }
         }
