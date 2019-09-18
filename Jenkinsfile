@@ -46,7 +46,8 @@ pipeline {
                                     --blackduck.trust.cert=true \
                                     --logging.level.com.synopsys.integration=DEBUG \
                                     --detect.project.name="CloudBeesInsecureBank" \
-                                    --detect.tools="DOCKER" \
+                                    --detect.tools="DOCKER,BINARY_SCAN,SIGNATURE_SCAN" \
+                                    --detect.binary.scan.file.path="/opt/blackduck/shared/target/cloudbees_insecure_bank.tar" \
                                     --detect.docker.image="cloudbees_insecure_bank:latest" \
                                     --detect.project.version.name="DOCKER_${BUILD_TAG}" \
                                     --detect.risk.report.pdf=true \
