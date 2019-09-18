@@ -25,12 +25,12 @@ pipeline {
         steps {
           container('detect') {
             unstash 'builtSources'
-            sh 'which java'
             sh '/opt/blackduck/detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                 --blackduck.trust.cert=true \
                 --detect.project.name="CloudBeesInsecureBank" \
+                --detect.java.path="/usr/bin/java" \
                 --detect.tools="SIGNATURE_SCAN" \
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
