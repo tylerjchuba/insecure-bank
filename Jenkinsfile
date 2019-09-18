@@ -25,7 +25,7 @@ pipeline {
         steps {
           container('detect') {
             unstash 'builtSources'
-            sh 'ls'
+            sh 'which java'
             sh '/opt/blackduck/detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
