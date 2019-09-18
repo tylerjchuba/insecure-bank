@@ -25,9 +25,8 @@ pipeline {
         steps {
           container('detect') {
             unstash 'builtSources'
-            sh 'curl -o detect.sh https://detect.synopsys.com/detect.sh'
-            sh 'chmod +x detect.sh'
-            sh './detect.sh \
+            sh 'ls'
+            sh '/opt/blackduck/detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                 --blackduck.trust.cert=true \
