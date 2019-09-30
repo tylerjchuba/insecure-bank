@@ -1,25 +1,20 @@
-# To run the Alpine Tomcat image on a container
-# docker run --name boi_web_server -d -p 8080:8080
+FROM tomcat:jre8
 
-FROM jeanblanchard/tomcat:8
+MAINTAINER davemeurer@github
 
-RUN echo 'Setting up the Apache Tomcat server ...'
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
 
-ENV MAVEN_VERSION 3.5.4
-ENV MAVEN_HOME /usr/lib/mvn
-ENV PATH $MAVEN_HOME/bin:$PATH
+RUN mkdir -p "$CATALINA_HOME"
 
-RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-  tar -zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-  rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-  mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
+WORKDIR $CATALINA_HOME
 
-RUN mkdir -p insecure-bank
+RUN chgrp -R 0 $CATALINA_HOME
+RUN chmod -R g+rw $CATALINA_HOME
+RUN find $CATALINA_HOME -type d -exec chmod g+x {} +
 
-ADD . / insecure-bank/
+COPY target/insecure-bank.war /usr/local/tomcat/webapps/insecure-bank.war
 
-RUN cd insecure-bank && ls && mvn clean package && cp target/insecure-bank.war /opt/tomcat/webapps/
+EXPOSE 8080
 
-# RUN echo $CATALINA_HOME
-
-RUN echo 'Apache Server set up is complete ...'
+CMD ["catalina.sh", "run"]

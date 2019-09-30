@@ -33,7 +33,7 @@ create table creditaccount(
 
 
 create table transfer(
-    id serial,
+    id IDENTITY,
     fromAccount varchar(80) not null,
     toAccount varchar(80)  not null,
     description varchar(80)  not null,
@@ -45,7 +45,7 @@ create table transfer(
 );
 
 create table transaction(
-    id serial,
+    id IDENTITY,
     date TIMESTAMP,
     description varchar(80)  not null,
     number varchar(80) not null,
