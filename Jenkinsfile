@@ -141,7 +141,7 @@ pipeline {
         steps {
           slackSend color: 'good', message: "Publishing Image"
           container('docker-with-detect') {
-            unstash 'detectReport'
+            //unstash 'detectReport'
             unstash 'bdbaReport'
             sh 'find . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**.tar', fingerprint: true, onlyIfSuccessful: true
