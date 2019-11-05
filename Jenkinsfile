@@ -104,17 +104,11 @@ pipeline {
                                     --detect.binary.scan.file.path="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                     --detect.docker.image="cloudbees_detect_app:latest" \
                                     --detect.project.version.name="ALL_${BUILD_TAG}" \
-                                    --detect.risk.report.pdf=true \
                                     --detect.report.timeout=9000 \
                                     --detect.docker.passthrough.imageinspector.service.url="http://blackduck-imageinspector-alpine.blackduck-imageinspector" \
                                     --detect.docker.passthrough.shared.dir.path.local="/opt/blackduck/shared/" \
                                     --detect.docker.passthrough.shared.dir.path.imageinspector="/opt/blackduck/shared" \
                                     --detect.docker.passthrough.imageinspector.service.start=false'
-                        }
-                    }
-                    post {
-                        always {
-                            stash includes: '**/*.pdf', name: 'detectReport'
                         }
                     }
                 }
@@ -165,7 +159,6 @@ pipeline {
                container('tomcat') {
                  unstash 'warfile'
                  sh "cp target/insecure-bank.war /usr/local/tomcat/webapps/"
-                 sh "/usr/local/tomcat/bin/shutdown.sh"
                  sh "/usr/local/tomcat/bin/startup.sh"
                  sleep 45
                 }
