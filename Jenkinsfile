@@ -64,9 +64,17 @@ pipeline {
                             --detect.blackduck.signature.scanner.paths=src/,target/ \
                             --detect.report.timeout=9000'
                       }
+                      container("python-app"){
+                        container('python'){
+                        git branch: 'master', credentialsId: 'tchuba-git', url: 'https://github.com/tylerjchuba/polaris-python-utils.git'
+                        sh 'pip install -r requirements.txt'
+                        script{
+                            RETURN_STATUS = sh (script: 'python3 check_high.py', returnStdout: true).trim()
+                        }
+                      }
+                    }
                    }
                 }
-
           }
       }
 
@@ -111,15 +119,7 @@ pipeline {
                                     --detect.docker.passthrough.imageinspector.service.start=false'
                         }
 
-                    container("python-app"){
-                      container('python'){
-                      git branch: 'master', credentialsId: 'tchuba-git', url: 'https://github.com/tylerjchuba/polaris-python-utils.git'
-                      sh 'pip install -r requirements.txt'
-                      script{
-                          RETURN_STATUS = sh (script: 'python3 check_high.py', returnStdout: true).trim()
-                      }
-                    }
-                  }
+
                 }
               }
 
