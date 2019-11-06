@@ -113,7 +113,7 @@ pipeline {
                     }
                     container(label: "python-app"){
                       git branch: 'master', credentialsId: 'tchuba-git', url: 'https://github.com/tylerjchuba/polaris-python-utils.git'
-                      hasHighFindings = sh(script: python check_high.py, returnStdout: true).trim()
+                      hasHighFindings = sh(script: 'python check_high.py', returnStdout: true).trim()
                       if (hasHighFindings){
                         error 'High level findings found. Killing job.'
                       }
