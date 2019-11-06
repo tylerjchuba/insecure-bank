@@ -110,14 +110,14 @@ pipeline {
                                     --detect.docker.passthrough.shared.dir.path.imageinspector="/opt/blackduck/shared" \
                                     --detect.docker.passthrough.imageinspector.service.start=false'
                         }
-                    container(label: "python-app"){
+                    container("python-app"){
                       git branch: 'master', credentialsId: 'tchuba-git', url: 'https://github.com/tylerjchuba/polaris-python-utils.git'
                       hasHighFindings = sh(script: 'python check_high.py', returnStdout: true).trim()
                       if (hasHighFindings){
                         error 'High level findings found. Killing job.'
                       }
                     }
-                  }
+  
                 }
 
                 stage('Black Duck Binary Analysis') {
