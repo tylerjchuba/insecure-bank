@@ -112,10 +112,11 @@ pipeline {
                         }
 
                     container("python-app"){
+                      container('python'){
                       git branch: 'master', credentialsId: 'tchuba-git', url: 'https://github.com/tylerjchuba/polaris-python-utils.git'
-                      env.fail = sh([script: 'python check_high.py', returnStdout: true]).trim()
-                      if (env.fail){
-                        error 'High level findings found. Killing job.'
+                      sh 'pip install -r requirements.txt'
+                      script{
+                          RETURN_STATUS = sh (script: 'python3 check_high.py', returnStdout: true).trim()
                       }
                     }
                   }
@@ -171,7 +172,7 @@ pipeline {
                  sleep 45
                 }
 
-                 slackSend color: 'good', message: 'Initiating IAST with Seeker'
+             slackSend color: 'good', message: 'Initiating IAST with Seeker'
              container('arachni'){
                sh '/sectools/arachni-1.5.1-0.5.12/bin/arachni --checks=csrf http://aaf00f943ce0911e9a6c70217af26a80-860603976.us-east-2.elb.amazonaws.com/insecure-bank/ --report-save-path=Arachni-report.afr'
                sh '/sectools/arachni-1.5.1-0.5.12/bin/arachni_reporter Arachni-report.afr --report=xml:outfile=Arachni-Report.xml'
