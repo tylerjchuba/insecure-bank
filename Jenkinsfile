@@ -135,7 +135,7 @@ pipeline {
                 }
             }
         }
-      }
+    
 
       stage('Publish') {
         agent { label 'docker-app' }
