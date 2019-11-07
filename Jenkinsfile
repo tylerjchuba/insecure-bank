@@ -99,7 +99,7 @@ pipeline {
                                     --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                                     --blackduck.trust.cert=true \
                                     --logging.level.com.synopsys.integration=DEBUG \
-                                    --detect.project.name="CloudBeesInsecureBank" \
+                                    --detect.project.name="CloudBeesInsecureBank-FailBuild" \
                                     --detect.tools="DOCKER,BINARY_SCAN" \
                                     --detect.binary.scan.file.path="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                     --detect.docker.image="cloudbees_detect_app:latest" \
@@ -117,7 +117,7 @@ pipeline {
                         error 'High level findings found. Killing job.'
                       }
                     }
-  
+
                 }
 
                 stage('Black Duck Binary Analysis') {
