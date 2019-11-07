@@ -199,6 +199,7 @@ pipeline {
              failure {
                  slackSend message: "${env.BUILD_NUMBER} Pipeline completed"
              }
+           }
 
 
   }
