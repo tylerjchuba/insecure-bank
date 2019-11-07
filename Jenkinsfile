@@ -112,6 +112,7 @@ pipeline {
                         }
 
                 }
+              }
 
                 stage('Black Duck Binary Analysis') {
                     agent { label "python-app" }
