@@ -83,7 +83,7 @@ pipeline {
         }
         post {
             failure {
-                slackSend message: "${env.BUILD_NUMBER} Build failed due to High level findings on Polaris"
+                slackSend color: 'RED', message: "${env.BUILD_NUMBER} Build failed due to High level findings on Polaris"
             }
           }
       }
@@ -197,7 +197,7 @@ pipeline {
            }
          post {
              failure {
-                 slackSend message: "${env.BUILD_NUMBER} Pipeline completed"
+                 slackSend color: 'good', message: "${env.BUILD_NUMBER} Pipeline completed"
              }
            }
 
