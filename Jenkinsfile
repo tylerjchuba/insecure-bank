@@ -135,7 +135,6 @@ pipeline {
                     }
                 }
             }
-        }
       }
 
       stage('Publish') {
