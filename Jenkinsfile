@@ -109,7 +109,7 @@ pipeline {
                                     --detect.docker.passthrough.shared.dir.path.local="/opt/blackduck/shared/" \
                                     --detect.docker.passthrough.shared.dir.path.imageinspector="/opt/blackduck/shared" \
                                     --detect.docker.passthrough.imageinspector.service.start=false \
-                                    --detect.policy.check.fail.on.severities blocker,critical,high'
+                                    --detect.policy.check.fail.on.severities=BLOCKER,CRITICAL,HIGH'
                         }
                 }
               }
