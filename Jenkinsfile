@@ -85,6 +85,7 @@ pipeline {
             failure {
                 slackSend message: "${env.BUILD_NUMBER} Build failed due to High level findings on Polaris"
             }
+          }
       }
 
 
@@ -194,7 +195,6 @@ pipeline {
                stash includes: '**/Seeker-Report.json', name: 'SeekerReport'
              }
            }
-         }
          post {
              failure {
                  slackSend message: "${env.BUILD_NUMBER} Pipeline completed"
