@@ -111,6 +111,7 @@ pipeline {
                                     --detect.docker.passthrough.imageinspector.service.start=false'
                         }
                 }
+              }
 
                 stage('Black Duck Binary Analysis') {
                     agent { label "python-app" }
