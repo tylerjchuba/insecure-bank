@@ -108,7 +108,8 @@ pipeline {
                                     --detect.docker.passthrough.imageinspector.service.url="http://blackduck-imageinspector-alpine.blackduck-imageinspector" \
                                     --detect.docker.passthrough.shared.dir.path.local="/opt/blackduck/shared/" \
                                     --detect.docker.passthrough.shared.dir.path.imageinspector="/opt/blackduck/shared" \
-                                    --detect.docker.passthrough.imageinspector.service.start=false'
+                                    --detect.docker.passthrough.imageinspector.service.start=false \
+                                    --detect.policy.check.fail.on.severities' 
                         }
                 }
               }
@@ -135,7 +136,7 @@ pipeline {
                 }
             }
         }
-    
+
 
       stage('Publish') {
         agent { label 'docker-app' }
