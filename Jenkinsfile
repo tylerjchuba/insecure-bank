@@ -81,6 +81,10 @@ pipeline {
             }
           }
         }
+        post {
+            failure {
+                slackSend message: "${env.BUILD_NUMBER} Build failed due to High level findings on Polaris"
+            }
       }
 
 
@@ -191,6 +195,10 @@ pipeline {
              }
            }
          }
+         post {
+             failure {
+                 slackSend message: "${env.BUILD_NUMBER} Pipeline completed"
+             }
 
 
   }
