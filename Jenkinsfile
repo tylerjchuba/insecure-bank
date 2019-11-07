@@ -117,7 +117,7 @@ pipeline {
                         error 'High level findings found. Killing job.'
                       }
                     }
-  
+
                 }
 
                 stage('Black Duck Binary Analysis') {
@@ -142,6 +142,7 @@ pipeline {
                 }
             }
         }
+      }
 
       stage('Publish') {
         agent { label 'docker-app' }
