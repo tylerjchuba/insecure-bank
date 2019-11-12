@@ -54,7 +54,7 @@ pipeline {
                             --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                             --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                             --blackduck.trust.cert=true \
-                            --detect.polaris.enabled=true \
+                            ---detect.tools=POLARIS \
                             --polaris.url="https://sipse.polaris.synopsys.com" \
                             --polaris.access.token="${POLARIS_ACCESS_TOKEN}" \
                             --detect.project.name="CloudBeesInsecureBank" \
